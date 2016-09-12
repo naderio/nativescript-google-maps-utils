@@ -1,0 +1,3 @@
+# nativescript-google-maps-sdk-utils
+
+NativeScript Google Maps SDK utility library to support features such as marker clustering, heatmap, ...
