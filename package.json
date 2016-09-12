@@ -1,6 +1,6 @@
 {
   "name": "nativescript-google-maps-utils",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "NativeScript Google Maps SDK utility library to support features such as marker clustering, heatmap, ...",
   "main": "index.js",
   "nativescript": {

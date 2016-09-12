@@ -1,3 +1,10 @@
+android { 
+	productFlavors {
+		"nativescript-google-maps-utils" {
+			dimension "nativescriptgooglemapsutils"
+		}
+	}
+}
 
 dependencies {
     compile 'com.google.maps.android:android-maps-utils:0.4.+'
