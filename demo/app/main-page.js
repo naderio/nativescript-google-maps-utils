@@ -1,7 +1,7 @@
 var vmModule = require("./main-view-model");
 var observableModule = require("data/observable");
 var GoogleMaps = require("nativescript-google-maps-sdk");
-var GoogleMapsUtils = require("nativescript-google-maps-sdk-utils");
+var GoogleMapsUtils = require("nativescript-google-maps-utils");
 var Image = require("ui/image").Image;
 var imageSource = require("image-source");
 var Color = require("color").Color;
@@ -129,7 +129,7 @@ function onMapReady(args) {
        return GoogleMaps.Position.positionFromLatLng(position[0], position[1]);
     });
 
-    GoogleMapsUtils.enableDebug(require('./debug')('nativescript-google-maps-sdk-utils'));
+    GoogleMapsUtils.enableDebug(require('./debug')('nativescript-google-maps-utils'));
 
     GoogleMapsUtils.setupHeatmap(mapView, positionSet);
 

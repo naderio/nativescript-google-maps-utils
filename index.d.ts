@@ -1,5 +1,5 @@
 
-declare module "nativescript-google-maps-sdk-utils" {
+declare module "nativescript-google-maps-utils" {
 
     import { MapView, Position, Marker } from "nativescript-google-maps-sdk";
 

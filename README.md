@@ -1,4 +1,4 @@
-nativescript-google-maps-sdk-utils
+nativescript-google-maps-utils
 ==================================
 
 NativeScript Google Maps SDK utility library to support features such as marker clustering, heatmap, ...
@@ -26,7 +26,7 @@ iOS not implemented.
 # Install
 
 ```
-tns plugin add nativescript-google-maps-sdk-utils
+tns plugin add nativescript-google-maps-utils
 ```
 
 # Usage
@@ -34,7 +34,7 @@ tns plugin add nativescript-google-maps-sdk-utils
 
 ```
 var GoogleMaps = require('nativescript-google-maps-sdk');
-var GoogleMapsUtils = require('nativescript-google-maps-sdk-utils');
+var GoogleMapsUtils = require('nativescript-google-maps-utils');
 
 
 function onMapReady(args) {
@@ -59,6 +59,6 @@ function onMapReady(args) {
 
 import using either of
 
-* `import GoogleMapsUtils = require("nativescript-google-maps-sdk-utils")`
-* `import * as GoogleMapsUtils from "nativescript-google-maps-sdk-utils"`
+* `import GoogleMapsUtils = require("nativescript-google-maps-utils")`
+* `import * as GoogleMapsUtils from "nativescript-google-maps-utils"`
 
