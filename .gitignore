@@ -1,0 +1,11 @@
+node_modules
+*.js
+!demo/app/*.js
+*.map
+*.d.ts
+!index.d.ts
+demo/platforms
+demo/node_modules
+.DS_Store
+*.log
+lib
