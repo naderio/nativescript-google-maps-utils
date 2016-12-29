@@ -20,7 +20,7 @@ iOS not implemented.
 ## Dependencies
 
 * [nativescript-google-maps-sdk](https://github.com/dapriett/nativescript-google-maps-sdk)
-* https://github.com/googlemaps[android-maps-utils
+* https://github.com/googlemaps/android-maps-utils
 * https://github.com/googlemaps/google-maps-ios-utils
 
 # Install
