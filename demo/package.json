@@ -5,13 +5,13 @@
       "version": "2.0.0"
     },
     "tns-android": {
-      "version": "2.2.0"
+      "version": "2.5.0"
     }
   },
   "dependencies": {
-    "nativescript-google-maps-sdk": "*",
-    "nativescript-google-maps-utils": "file:..",
-    "tns-core-modules": "^2.0.0"
+    "nativescript-google-maps-sdk": "^1.4.3",
+    "nativescript-google-maps-utils": "^0.1.2",
+    "tns-core-modules": "^2.5.2"
   },
   "devDependencies": {
     "babel-traverse": "6.7.6",

@@ -20,32 +20,31 @@ const HeatmapTileProvider = com.google.maps.android.heatmaps.HeatmapTileProvider
 
 const TileOverlayOptions = com.google.android.gms.maps.model.TileOverlayOptions;
 
-
-const debugNull = function(...args: Array<any>): void { };
+const debugNull = function (...args: Array<any>): void { };
 
 function debugDefault(...args: Array<any>) {
-    args = args.map((value) => {
-        if (typeof value === 'object' && value) {
-            try {
-                value = JSON.stringify(value);
-            } catch (e) {
-                value = value.toString();
-            }
-        }
-        return value;
-    });
-    args.unshift('nativescript-socket.io');
-    console.log.apply(console, args);
+  args = args.map((value) => {
+    if (typeof value === 'object' && value) {
+      try {
+        value = JSON.stringify(value);
+      } catch (e) {
+        value = value.toString();
+      }
+    }
+    return value;
+  });
+  args.unshift('nativescript-socket.io');
+  console.log.apply(console, args);
 }
 
 let debug = debugNull;
 
 export function enableDebug(debugFn: ((...args: Array<any>) => any) = debugDefault): void {
-    debug = debugFn;
+  debug = debugFn;
 }
 
 export function disableDebug(): void {
-    debug = debugNull;
+  debug = debugNull;
 }
 
 
@@ -76,7 +75,7 @@ export interface IHeatmapConfig {
 
 }
 
-export function setupHeatmap(mapView: MapView, positions: Array<Position>, config: IHeatmapConfig = null) : IHeatmapConfig {
+export function setupHeatmap(mapView: MapView, positions: Array<Position>, config: IHeatmapConfig = null): IHeatmapConfig {
   debug('setupHeatmap');
 
   var list = new java.util.ArrayList();

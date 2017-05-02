@@ -3,6 +3,9 @@
         <maps:mapView latitude="{{ latitude }}" longitude="{{ longitude }}"
                       zoom="{{ zoom }}" bearing="{{ bearing }}"
                       tilt="{{ tilt }}" i-padding="50,50,50,50" padding="{{ padding }}" mapReady="onMapReady" 
-                      markerSelect="onMarkerSelect" cameraChanged="onCameraChanged" />
+                      cameraChanged="onCameraChanged"
+                      markerSelect="onMarkerSelect"
+                      markerInfoWindowTapped="onMarkerInfoWindowTapped"
+        />
     </GridLayout>
 </Page>

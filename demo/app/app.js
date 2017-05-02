@@ -1,6 +1,6 @@
 var application = require("application");
 
-if(application.ios) {
+if (application.ios) {
   GMSServices.provideAPIKey("AIzaSyAtRVvG3Be3xXiZFR7xp-K-9hy4nZ4hMFs");
 }
 
@@ -13,4 +13,6 @@ application.on(application.uncaughtErrorEvent, function (event) {
 });
 
 
-application.start({ moduleName: "main-page" });
+application.start({
+  moduleName: "main-page"
+});

@@ -1,6 +1,7 @@
 var observable = require("data/observable");
 var HelloWorldModel = (function (_super) {
     __extends(HelloWorldModel, _super);
+
     function HelloWorldModel() {
         _super.call(this);
         this.set("latitude", 36.800220);
