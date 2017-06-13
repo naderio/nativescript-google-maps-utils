@@ -1,5 +1,5 @@
 
-import * as utils from "utils/utils";
+import * as utils from "tns-core-modules/utils/utils";
 
 import { MapView, Marker, Position } from "nativescript-google-maps-sdk"
 
