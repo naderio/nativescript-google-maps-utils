@@ -1,7 +1,4 @@
 
-declare var java;
-declare var com;
-
 import * as utils from "tns-core-modules/utils/utils";
 
 import { MapView, Marker, Position } from "nativescript-google-maps-sdk"

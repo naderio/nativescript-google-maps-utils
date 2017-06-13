@@ -1,8 +1,9 @@
 {
   "name": "nativescript-google-maps-utils",
-  "version": "0.2.0",
+  "version": "0.1.4",
   "description": "NativeScript Google Maps SDK utility library to support features such as marker clustering, heatmap, ...",
   "main": "index",
+  "typings": "index.d.ts",
   "nativescript": {
     "platforms": {
       "ios": "2.0.0",
@@ -10,8 +11,11 @@
     }
   },
   "scripts": {
+    "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "rsync -avz --delete ./*.js demo/dev/"
+    "dev": "rsync -avz --delete ./*.js demo/app/dev/",
+    "android-native-type-definition": "cd demo ; tns build android ; java -jar platforms/android/build-tools/dts-generator.jar -input platforms/android/build/intermediates/exploded-aar/com.google.android.gms/play-services-maps/11.0.0/jars/classes.jar -input platforms/android/build/intermediates/exploded-aar/com.google.maps.android/android-maps-utils/0.5/jars/classes.jar ; cp -f ./out/android.d.ts ../typings/android.d.ts ; xxxrm -fr ./out ; cd ..",
+    "ios-native-type-definition": "cd demo ; TNS_TYPESCRIPT_DECLARATIONS_PATH=$(pwd)/typings tns build ios ; cp -f './typings/x86_64/objc!GoogleMaps'*'.d.ts' ../typings/ ; cp -f './typings/x86_64/objc!GoogleMaps.d.ts' ../typings/ios.d.ts ; xxxrm -fr ./typings* ; cd .."
   },
   "repository": {
     "type": "git",
@@ -19,9 +23,12 @@
   },
   "keywords": [
     "nativescript",
+    "google-maps",
     "google maps",
     "marker cluster",
-    "heatmap"
+    "heatmap",
+    "android",
+    "ios"
   ],
   "author": "Nader Toukabri <contact@nader.tn>",
   "license": "Unlicense",
@@ -30,9 +37,9 @@
   },
   "homepage": "https://github.com/naderio/nativescript-google-maps-utils#readme",
   "devDependencies": {
-    "tns-core-modules": "^3.0.1",
-    "tns-platform-declarations": "^3.0.1",
-    "typescript": "^2.3.4"
+    "tns-core-modules": "3.0.1",
+    "tns-platform-declarations": "3.0.1",
+    "typescript": "2.3.4"
   },
   "dependencies": {
     "nativescript-google-maps-sdk": "*"
