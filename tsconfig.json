@@ -1,13 +1,25 @@
 {
     "compilerOptions": {
-        "target": "es5",
+        "target": "es2015",
         "module": "commonjs",
         "removeComments": true,
         "experimentalDecorators": true,
+        "lib": [
+            "es6"
+        ],
         "sourceMap": true
     },
     "files": [
+
+        "./node_modules/tns-platform-declarations/ios.d.ts",
+        "./node_modules/tns-platform-declarations/android.d.ts",
+
+        "./typings/android.d.ts",
+        "./typings/ios.d.ts",
+
         "index.android.ts",
         "index.ios.ts"
-    ]
+
+    ],
+    "compileOnSave": false
 }

@@ -3,9 +3,14 @@ node_modules
 !demo/app/*.js
 *.map
 *.d.ts
+!references.d.ts
 !index.d.ts
+!typings/*
+typings-*
+out
 demo/platforms
 demo/node_modules
 .DS_Store
 *.log
 lib
+.tmp
