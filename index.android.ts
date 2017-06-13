@@ -2,10 +2,9 @@
 declare var java;
 declare var com;
 
-import * as utils from "utils/utils";
+import * as utils from "tns-core-modules/utils/utils";
 
 import { MapView, Marker, Position } from "nativescript-google-maps-sdk"
-
 
 const LatLng = com.google.android.gms.maps.model.LatLng;
 const PolylineOptions = com.google.android.gms.maps.model.PolylineOptions;
@@ -48,20 +47,84 @@ export function disableDebug(): void {
 }
 
 
+const CustomClusterItem = java.lang.Object.extend({
+
+  interfaces: [ClusterItem],
+
+  marker: null, // will be attached manually later
+
+  init: function () { },
+
+  getMarker: function () {
+    return this.marker;
+  },
+
+  getPosition: function () {
+    return this.marker.position.android;
+  },
+
+  getTitle: function () {
+    return this.marker.title;
+  },
+
+  getSnippet: function () {
+    return this.marker.snippet;
+  },
+
+});
+
+
+const CustomClusterManager = ClusterManager.extend({
+
+  mapView: null, // will be attached manually later
+
+  onMarkerClick(gmsMarker) {
+    this.super.onMarkerClick(gmsMarker);
+    let marker = this.mapView.findMarker((marker) => {
+      if (marker.android.getId) {
+        return marker.android.getId() === gmsMarker.getId();
+      }
+      return marker.title === gmsMarker.getTitle() && marker.snippet === gmsMarker.getSnippet() && marker.position.android.equals(gmsMarker.getPosition());
+    });
+    marker && this.mapView.notifyMarkerTapped(marker);
+    return false;
+  },
+
+  onInfoWindowClick(gmsMarker) {
+    this.super.onInfoWindowClick(gmsMarker);
+    let marker = this.mapView.findMarker((marker) => {
+      if (marker.android.getId) {
+        return marker.android.getId() === gmsMarker.getId();
+      }
+      return marker.title === gmsMarker.getTitle() && marker.snippet === gmsMarker.getSnippet() && marker.position.android.equals(gmsMarker.getPosition());
+    });
+    marker && this.mapView.notifyMarkerInfoWindowTapped(marker);
+    return false;
+  },
+
+});
+
 export function setupMarkerCluster(mapView: MapView, markers: Array<Marker>, options) {
   debug('setupMarkerCluster');
 
-  var clusterManager = new ClusterManager(utils.ad.getApplicationContext(), mapView.gMap);
+  var clusterManager = new CustomClusterManager(utils.ad.getApplicationContext(), mapView.gMap);
 
-  mapView.gMap.setOnCameraIdleListener(clusterManager);
+  clusterManager.mapView = mapView;
+
+  if (mapView.gMap.setOnCameraIdleListener) {
+    mapView.gMap.setOnCameraIdleListener(clusterManager);
+  } else if (mapView.gMap.setOnCameraChangeListener) {
+    mapView.gMap.setOnCameraChangeListener(clusterManager);
+  }
+
+  mapView.gMap.setOnMarkerClickListener(clusterManager);
+  mapView.gMap.setOnInfoWindowClickListener(clusterManager);
 
   markers.forEach(function (marker) {
-    clusterManager.addItem(new ClusterItem({
-      rotation: marker.rotation,
-      getPosition: function () {
-        return marker.position.android;
-      }
-    }));
+    let markerItem = new CustomClusterItem();
+    markerItem.marker = marker;
+    clusterManager.addItem(markerItem);
+    mapView._markers.push(marker);
   });
 
   clusterManager.cluster();

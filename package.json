@@ -1,6 +1,6 @@
 {
   "name": "nativescript-google-maps-utils",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "NativeScript Google Maps SDK utility library to support features such as marker clustering, heatmap, ...",
   "main": "index",
   "nativescript": {
@@ -30,9 +30,9 @@
   },
   "homepage": "https://github.com/naderio/nativescript-google-maps-utils#readme",
   "devDependencies": {
-    "tns-core-modules": "^2.5.2",
-    "tns-platform-declarations": "^2.5.2",
-    "typescript": "^2.1.6"
+    "tns-core-modules": "^3.0.1",
+    "tns-platform-declarations": "^3.0.1",
+    "typescript": "^2.3.4"
   },
   "dependencies": {
     "nativescript-google-maps-sdk": "*"

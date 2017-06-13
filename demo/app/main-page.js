@@ -1,5 +1,6 @@
 var vmModule = require("./main-view-model");
-var observableModule = require("data/observable");
+var observableModule = require("tns-core-modules/data/observable");
+var platform = require("tns-core-modules/platform");
 var GoogleMaps = require("nativescript-google-maps-sdk");
 var GoogleMapsUtils = require("nativescript-google-maps-utils");
 // var GoogleMapsUtils = require("./dev");
@@ -23,72 +24,89 @@ function pageLoaded(args) {
 }
 exports.pageLoaded = pageLoaded;
 
+
+function configureMap(mapView, options) {
+
+  if (platform.isAndroid) {
+
+    options = options || {};
+
+    var uiSetting = mapView.gMap.getUiSettings();
+
+    if ('allGesturesEnabled' in options) {
+      uiSetting.setAllGesturesEnabled(options.allGesturesEnabled);
+    }
+    if ('compassEnabled' in options) {
+      uiSetting.setCompassEnabled(options.compassEnabled);
+    }
+    if ('indoorLevelPickerEnabled' in options) {
+      uiSetting.setIndoorLevelPickerEnabled(options.indoorLevelPickerEnabled);
+    }
+    if ('mapToolbarEnabled' in options) {
+      uiSetting.setMapToolbarEnabled(options.mapToolbarEnabled);
+    }
+    if ('myLocationButtonEnabled' in options) {
+      uiSetting.setMyLocationButtonEnabled(options.myLocationButtonEnabled);
+    }
+    if ('rotateGesturesEnabled' in options) {
+      uiSetting.setRotateGesturesEnabled(options.rotateGesturesEnabled);
+    }
+    if ('scrollGesturesEnabled' in options) {
+      uiSetting.setScrollGesturesEnabled(options.scrollGesturesEnabled);
+    }
+    if ('tiltGesturesEnabled' in options) {
+      uiSetting.setTiltGesturesEnabled(options.tiltGesturesEnabled);
+    }
+    if ('zoomControlsEnabled' in options) {
+      uiSetting.setZoomControlsEnabled(options.zoomControlsEnabled);
+    }
+    if ('zoomGesturesEnabled' in options) {
+      uiSetting.setZoomGesturesEnabled(options.zoomGesturesEnabled);
+    }
+
+    if ('myLocationEnabled' in options) {
+      mapView.gMap.setMyLocationEnabled(options.myLocationEnabled);
+    }
+    if ('trafficEnabled' in options) {
+      mapView.gMap.setTrafficEnabled(options.trafficEnabled);
+    }
+
+  }
+
+}
+
+function generateRandomPosition(position, distance) {
+  var r = distance / 111300;
+
+  var x = position[0];
+  var y = position[1];
+
+  var u = Math.random();
+  var v = Math.random();
+
+  var w = r * Math.sqrt(u);
+  var t = 2 * Math.PI * v;
+
+  var dx = w * Math.cos(t) / Math.cos(y);
+  var xy = w * Math.sin(t);
+
+  return [x + dx, y + xy];
+}
+
 function onMapReady(args) {
   debug("onMapReady");
 
   var mapView = args.object;
 
-  if (mapView.android) {
-
-    function configure(mapView, options) {
-
-      options = options || {};
-
-      var uiSetting = mapView.gMap.getUiSettings();
-
-      if ('allGesturesEnabled' in options) {
-        uiSetting.setAllGesturesEnabled(options.allGesturesEnabled);
-      }
-      if ('compassEnabled' in options) {
-        uiSetting.setCompassEnabled(options.compassEnabled);
-      }
-      if ('indoorLevelPickerEnabled' in options) {
-        uiSetting.setIndoorLevelPickerEnabled(options.indoorLevelPickerEnabled);
-      }
-      if ('mapToolbarEnabled' in options) {
-        uiSetting.setMapToolbarEnabled(options.mapToolbarEnabled);
-      }
-      if ('myLocationButtonEnabled' in options) {
-        uiSetting.setMyLocationButtonEnabled(options.myLocationButtonEnabled);
-      }
-      if ('rotateGesturesEnabled' in options) {
-        uiSetting.setRotateGesturesEnabled(options.rotateGesturesEnabled);
-      }
-      if ('scrollGesturesEnabled' in options) {
-        uiSetting.setScrollGesturesEnabled(options.scrollGesturesEnabled);
-      }
-      if ('tiltGesturesEnabled' in options) {
-        uiSetting.setTiltGesturesEnabled(options.tiltGesturesEnabled);
-      }
-      if ('zoomControlsEnabled' in options) {
-        uiSetting.setZoomControlsEnabled(options.zoomControlsEnabled);
-      }
-      if ('zoomGesturesEnabled' in options) {
-        uiSetting.setZoomGesturesEnabled(options.zoomGesturesEnabled);
-      }
-
-      if ('myLocationEnabled' in options) {
-        mapView.gMap.setMyLocationEnabled(options.myLocationEnabled);
-      }
-      if ('trafficEnabled' in options) {
-        mapView.gMap.setTrafficEnabled(options.trafficEnabled);
-      }
-
-    }
-
-
-    configure(mapView, {
-      compassEnabled: true,
-      zoomControlsEnabled: true,
-      myLocationButtonEnabled: false,
-      mapToolbarEnabled: true,
-      allGesturesEnabled: true,
-      myLocationEnabled: false,
-      trafficEnabled: true,
-    });
-
-
-  }
+  configureMap(mapView, {
+    compassEnabled: true,
+    zoomControlsEnabled: true,
+    myLocationButtonEnabled: false,
+    mapToolbarEnabled: true,
+    allGesturesEnabled: true,
+    myLocationEnabled: false,
+    trafficEnabled: true,
+  });
 
   debug("Setting a marker...");
 
@@ -104,24 +122,6 @@ function onMapReady(args) {
 
   var positionSet;
   var makerSet;
-
-  function generateRandomPosition(position, distance) {
-    var r = distance / 111300;
-
-    var x = position[0];
-    var y = position[1];
-
-    var u = Math.random();
-    var v = Math.random();
-
-    var w = r * Math.sqrt(u);
-    var t = 2 * Math.PI * v;
-
-    var dx = w * Math.cos(t) / Math.cos(y);
-    var xy = w * Math.sin(t);
-
-    return [x + dx, y + xy];
-  }
 
   positionSet = [];
   for (var i = 0; i < 200; i++) {
