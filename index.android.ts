@@ -121,7 +121,6 @@ export function setupMarkerCluster(mapView: MapView, markers: Array<Marker>, opt
     let markerItem = new CustomClusterItem();
     markerItem.marker = marker;
     clusterManager.addItem(markerItem);
-    mapView._markers.push(marker);
   });
 
   clusterManager.cluster();
